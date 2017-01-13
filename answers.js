@@ -32,7 +32,7 @@ console.log(someArrayTwo.filter(getPositives)); // testing
 
 var someArrayThree = [0, 1,-5,-6, 42, 3,-873,45,-87, 64 , -101, 87, 9, 3, 2, -45,5,0,-8,44];
 
-return someArrayThree.filter((x) => x >= 0).forEach(x => console.log(x));
+someArrayThree.filter((x) => x >= 0).forEach(x => console.log(x));
 
 // Filter Array
 // Write a function called filterArray that takes a callback function and an array as arguments. 
@@ -40,3 +40,45 @@ return someArrayThree.filter((x) => x >= 0).forEach(x => console.log(x));
 // callback function returns true.
 // NOTE: This is a trick question. The answer is a one-liner and you are allowed to use array.filter :)
 
+var filterArray = Array.prototype.filter;
+
+// The Longest Word
+// Write a function called longestWord that takes a string as argument, and returns the 
+// longest word in the string. You should use Array.prototype.reduce to do your work.
+// Hint: You can use String.prototype.split to split the string into an array of words.
+var someString = "hey there sillynilly what can i do for you?";
+
+function longestWord(str) {
+    var tempArray = str.split(" ");
+    return tempArray.reduce(function(longest, word){
+        if(longest.length < word.length) {
+            longest = word;
+        }
+        return longest;
+    }, "")
+}
+
+console.log(longestWord(someString));
+
+// I’d like to buy a vowel
+// Write a function called countVowels that takes a string and returns the number of 
+// vowels in the string. You should use Array.prototype.reduce to do your work.
+// For the string "The quick brown fox", the output should be 5 because there is one e, 
+// one u, one i and two os.
+// Hint: You can use String.prototype.split again. There is a way to use it to split a 
+// string by character. Try to Google it :)
+// Hint 2: You can create an array of vowels and use Array.prototype.indexOf to check if 
+// the current letter is a vowel.
+var vowelTest = "I have a lot of vowels, find them all!";
+
+function countVowels(str) {
+    var tempVowelArr = str.split("");
+    return tempVowelArr.reduce(function(totalVowel, isVowel){
+        if (isVowel.match(/[aeiou]/gim)) {
+            totalVowel++;
+        }
+        return totalVowel;
+    },0)
+}
+
+console.log(countVowels(vowelTest));
