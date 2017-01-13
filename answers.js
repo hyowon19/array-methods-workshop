@@ -159,3 +159,23 @@ var isNotEmpty = negate(isEmpty);
 
 console.log([1,2,3].filter(isEven));
 console.log([1,2,3].filter(isOdd));
+
+// Challenge
+// As a challenge, provide a more complete version of the negate function that will 
+// work with any number of parameters.
+
+function negateReal(fn) {
+    return function(arguments){
+        return !fn(arguments);
+    }
+}
+
+function firstDividesSecond(first, second) {
+  return second % first === 0;
+}
+
+var firstDoesNotDivideSecond = negateReal(firstDividesSecond);
+
+console.log(firstDividesSecond(1000,20));
+
+console.log(firstDoesNotDivideSecond(1000,20));
