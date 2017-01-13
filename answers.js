@@ -90,27 +90,72 @@ console.log(countVowels(vowelTest));
 // For example, starting with [1, -10, 20, 40, 5], your function should return {highest: 40, lowest: -10}.
 // Hint: Javascript has a special value called Infinity, which is higher than any other 
 // number. See if you can initialize your reduce accumulator with Infinity and -Infinity :)
-var numArray = [23,7653,Infinity,99,3,56,1,2398,23,4,7,86,33,89,1,-8888];
+var numArray = [23,7653,0,99,3,56,1,2398,23,4,7,86,33,89,1];
 
 function highLow(arr) {
-    // var arrayHigh = numArray;
-    // var arrayLow = numArray;
     var low = numArray.reduce(function(low, isLowest){
         if (low >= isLowest) {
             var low = isLowest;
         }
         return low;
-    }, 0)
+    }, Infinity)
     var high = numArray.reduce(function(high, isHighest){
        if (high <= isHighest) {
            var high = isHighest;
        }
        return high;
-    }, 0)
+    }, -Infinity)
     
     console.log("highest:" + high + ", lowest:" + low)
 }
 
 highLow()
 
-//make two arrays to throw into and then reverse the comparisons to get highest and lowest values
+// Wheel of Fortune
+// Write a function called countChars that takes a string, and returns an object where 
+// the keys are letters, and the value is the number of times that letter appears.
+var someNewString = "Hello there world, how are you doing on this fine day?";
+
+function countChars(aString) {
+    var letters = {};
+    aString
+        .split("")
+        .filter(function(currentLetter) {
+            return currentLetter !== " ";
+        })
+        .forEach(function(currentLetter) {
+            if(letters[currentLetter]) {
+                letters[currentLetter] = letters[currentLetter] + 1;
+            }
+            else {
+                letters[currentLetter] = 1
+            }
+        });
+        return letters;
+}
+
+console.log(countChars(someNewString));
+
+// Functional Programming
+// In this exercise, your goal is to create a negate function. negate takes one 
+// parameter: another function. negate should return a function that, when called, 
+// will return the opposite of what the input function would return on the same input.
+
+function negate(fn) {
+    return function(x){
+        return !fn(x);
+    }
+}
+
+function isEven(num) {
+  return num % 2 === 0;
+}
+function isEmpty(someList) {
+  return someList.length === 0;
+}
+
+var isOdd = negate(isEven);
+var isNotEmpty = negate(isEmpty);
+
+console.log([1,2,3].filter(isEven));
+console.log([1,2,3].filter(isOdd));
